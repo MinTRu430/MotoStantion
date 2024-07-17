@@ -1,0 +1,48 @@
+﻿@page
+@model MotoStation.Pages.Reports.TotalIncomeModel
+
+@{
+    ViewData["Title"] = "Total Income Report";
+}
+
+<h1>Total Income Report</h1>
+
+<p>
+    Total income from repairs: <strong>@Model.TotalIncome</strong>
+</p>
+
+<div>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/Index")'">Back to Reports</button>
+</div>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    p {
+        font-size: 1.2em;
+        color: #343a40;
+    }
+</style>

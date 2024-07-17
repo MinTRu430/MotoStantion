@@ -1,0 +1,65 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<h1>Поиск в базе данных</h1>
+
+<form method="post" class="search-form">
+    <div class="form-group">
+        <input type="text" asp-for="SearchQuery" class="form-control search-input" placeholder="Введите поисковый запрос..." />
+    </div>
+    <button type="submit" class="btn btn-custom">Поиск</button>
+</form>
+
+@if (Model.SearchResults != null && Model.SearchResults.Any())
+{
+    <h2>Результаты поиска</h2>
+    <ul class="search-results">
+        @foreach (var result in Model.SearchResults)
+        {
+            <li class="search-result-item">
+                <strong>@result.EntityName:</strong>
+                <button class="btn btn-link search-result-button" onclick="location.href='@result.Url'">@result.DisplayText</button>
+            </li>
+        }
+    </ul>
+}
+
+<style>
+    .search-form {
+        margin-top: 20px;
+    }
+
+    .search-input {
+        width: 100%;
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .search-results {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .search-result-item {
+        margin: 10px 0;
+    }
+
+    .search-result-button {
+        background: none;
+        border: none;
+        color: #007bff;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 0;
+        font-size: 1em;
+    }
+
+        .search-result-button:hover {
+            color: #0056b3;
+        }
+</style>

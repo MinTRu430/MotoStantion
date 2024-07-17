@@ -1,0 +1,125 @@
+﻿@page
+@model MotoStation.Pages.Employees.IndexModel
+
+@{
+    ViewData["Title"] = "Работники";
+}
+
+<h1>Работники</h1>
+
+<p>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("Create")'">Create New</button>
+</p>
+
+<form method="get">
+    <div class="form-group">
+        <label asp-for="SearchFirstName"></label>
+        <input asp-for="SearchFirstName" class="form-control" placeholder="First Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchLastName"></label>
+        <input asp-for="SearchLastName" class="form-control" placeholder="Last Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchPosition"></label>
+        <input asp-for="SearchPosition" class="form-control" placeholder="Position" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].HireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Employee)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HireDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Edit", new { id = item.EmployeeId })'">Edit</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Details", new { id = item.EmployeeId })'">Details</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Delete", new { id = item.EmployeeId })'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+</style>

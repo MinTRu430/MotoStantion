@@ -1,0 +1,105 @@
+﻿@page
+@model MotoStation.Pages.Parts.IndexModel
+
+@{
+    ViewData["Title"] = "Запчасти";
+}
+
+<h1>Запчасти</h1>
+
+<p>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("Create")'">Create New</button>
+</p>
+
+<form method="get">
+    <div class="form-group">
+        <label asp-for="SearchPartName"></label>
+        <input asp-for="SearchPartName" class="form-control" placeholder="Search by part name" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Part[0].PartName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Part[0].PartDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Part[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Part[0].StockQuantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Part)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockQuantity)
+                </td>
+                <td>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Edit", new { id = item.PartId })'">Edit</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Details", new { id = item.PartId })'">Details</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Delete", new { id = item.PartId })'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+</style>

@@ -1,0 +1,66 @@
+﻿@page
+@model MotoStation.Pages.Reports.IndexModel
+
+@{
+    ViewData["Title"] = "Отчеты";
+}
+
+<h1>Отчеты</h1>
+
+<p>
+    Здесь вы можете найти различные отчеты, связанные с MotoStation.
+</p>
+
+<div class="report-buttons">
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/TotalIncome")'">Отчет об общем доходе</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/AverageRepairCost")'">Отчет о средней стоимости ремонта</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/RepairOrdersByEmployee")'">Заказы на ремонт по отчету сотрудников</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/RepairOrdersByCustomer")'">Заказы на ремонт по отчетам клиентов</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/AverageRepairTime")'">Отчет о среднем времени ремонта</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/OnTimeCompletionRate")'">Отчет о проценте своевременного завершения</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/RepairsByMotorcycleMake")'">Ремонт мотоцикла Сделать отчет</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/RepairOrderStatusDistribution")'">Отчет о распределении статуса заказа на ремонт</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/RepairOrdersByMonth")'">Отчет о заказах на ремонт по месяцам</button>
+</div>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 10px 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+        display: inline-block;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .report-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    p {
+        font-size: 1.2em;
+        color: #343a40;
+    }
+</style>

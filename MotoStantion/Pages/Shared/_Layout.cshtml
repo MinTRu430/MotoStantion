@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - МотоСтанция</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #343a40 !important;
+        }
+
+        .navbar-brand {
+            color: #ffcc00 !important;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1.1em;
+        }
+
+        .btn-custom {
+            background-color: #ffcc00;
+            color: #343a40;
+            border: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 5px;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+            .btn-custom:hover {
+                background-color: #e6b800;
+                color: #ffffff;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">МотоСтанция</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/Customers/Index")'">Клиенты</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/Motorcycles/Index")'">Мотоциклы</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/RepairOrders/Index")'">Заказы на ремонт</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/Parts/Index")'">Запчасти</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/Employees/Index")'">Сотрудники</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-custom" onclick="location.href='@Url.Page("/Reports/Index")'">Отчеты</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

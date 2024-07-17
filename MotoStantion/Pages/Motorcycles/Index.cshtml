@@ -1,0 +1,155 @@
+﻿@page
+@model MotoStation.Pages.Motorcycles.IndexModel
+
+@{
+    ViewData["Title"] = "Мотоциклы";
+}
+
+<h1>Мотоциклы</h1>
+
+<p>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("Create")'">Create New</button>
+</p>
+
+<form method="get">
+    <div class="form-group">
+        <label asp-for="SearchMake"></label>
+        <input asp-for="SearchMake" class="form-control" placeholder="Make" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchModel"></label>
+        <input asp-for="SearchModel" class="form-control" placeholder="Model" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchYear"></label>
+        <input asp-for="SearchYear" class="form-control" type="number" placeholder="Year" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchVin"></label>
+        <input asp-for="SearchVin" class="form-control" placeholder="VIN" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchCustomerId"></label>
+        <input asp-for="SearchCustomerId" class="form-control" type="number" placeholder="Customer ID" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchHasImage"></label>
+        <select asp-for="SearchHasImage" class="form-control">
+            <option value="">All</option>
+            <option value="true">With Photo</option>
+            <option value="false">Without Photo</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="/Motorcycles/Index" asp-route-SortField="Make" asp-route-SortDescending="@(Model.SortField == "Make" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.Motorcycle[0].Make)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/Motorcycles/Index" asp-route-SortField="Model" asp-route-SortDescending="@(Model.SortField == "Model" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.Motorcycle[0].Model)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/Motorcycles/Index" asp-route-SortField="Year" asp-route-SortDescending="@(Model.SortField == "Year" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.Motorcycle[0].Year)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/Motorcycles/Index" asp-route-SortField="Vin" asp-route-SortDescending="@(Model.SortField == "Vin" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.Motorcycle[0].Vin)
+                </a>
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Motorcycle)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vin)
+                </td>
+                <td>
+                    @if (item.Customer != null)
+                    {
+                        @item.Customer.FirstName @item.Customer.LastName
+                    }
+                </td>
+                <td>
+                    @if (item.Image != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="Motorcycle Image" width="100" />
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Edit", new { id = item.MotorcycleId })'">Edit</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Details", new { id = item.MotorcycleId })'">Details</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Delete", new { id = item.MotorcycleId })'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+</style>

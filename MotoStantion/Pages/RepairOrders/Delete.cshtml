@@ -1,0 +1,113 @@
+﻿@page
+@model MotoStation.Pages.RepairOrders.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Repair Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.EstimatedCompletionDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.EstimatedCompletionDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.ActualCompletionDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.ActualCompletionDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.TotalCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.TotalCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.Motorcycle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.MotorcycleId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RepairOrder.Employee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RepairOrder.EmployeeId)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="RepairOrder.RepairOrderId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <button class="btn btn-custom" type="button" onclick="location.href='@Url.Page("./Index")'">Back to List</button>
+    </form>
+</div>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1, h3, h4 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    dl.row dt {
+        font-weight: bold;
+    }
+
+    dl.row dd {
+        margin-bottom: 10px;
+    }
+</style>

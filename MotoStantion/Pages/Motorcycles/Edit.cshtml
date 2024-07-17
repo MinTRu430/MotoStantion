@@ -1,0 +1,124 @@
+﻿@page
+@model MotoStation.Pages.Motorcycles.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Мотоциклы</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Motorcycle.MotorcycleId" />
+            <div class="form-group">
+                <label asp-for="Motorcycle.CustomerId" class="control-label"></label>
+                <select asp-for="Motorcycle.CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <span asp-validation-for="Motorcycle.CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motorcycle.Make" class="control-label"></label>
+                <input asp-for="Motorcycle.Make" class="form-control" />
+                <span asp-validation-for="Motorcycle.Make" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motorcycle.Model" class="control-label"></label>
+                <input asp-for="Motorcycle.Model" class="form-control" />
+                <span asp-validation-for="Motorcycle.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motorcycle.Year" class="control-label"></label>
+                <input asp-for="Motorcycle.Year" class="form-control" />
+                <span asp-validation-for="Motorcycle.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motorcycle.Vin" class="control-label"></label>
+                <input asp-for="Motorcycle.Vin" class="form-control" />
+                <span asp-validation-for="Motorcycle.Vin" class="text-danger"></span>
+            </div>
+
+            @if (Model.Motorcycle.Image != null)
+            {
+                <div class="form-group">
+                    <label for="CurrentImage" class="control-label">Current Image</label>
+                    <div>
+                        <img src="data:image;base64,@Convert.ToBase64String(Model.Motorcycle.Image)" alt="Motorcycle Image" style="max-width: 100%; height: auto;" />
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" asp-for="RemoveImage" />
+                        <label asp-for="RemoveImage" class="form-check-label">Remove Image</label>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label for="Image" class="control-label">New Image</label>
+                    <input type="file" class="form-control" id="Image" name="Image" />
+                </div>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-custom" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Index")'">Back to List</button>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1, h4 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .form-check-label {
+        padding-left: 1.25rem;
+    }
+</style>

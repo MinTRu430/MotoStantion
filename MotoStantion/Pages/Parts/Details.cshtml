@@ -1,0 +1,92 @@
+﻿@page
+@model MotoStation.Pages.Parts.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Part</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Part.PartName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Part.PartName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Part.PartDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Part.PartDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Part.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Part.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Part.StockQuantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Part.StockQuantity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Edit", new { id = Model.Part.PartId })'">Edit</button>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Index")'">Back to List</button>
+</div>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1, h4 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    dl.row dt {
+        font-weight: bold;
+    }
+
+    dl.row dd {
+        margin-bottom: 10px;
+    }
+</style>

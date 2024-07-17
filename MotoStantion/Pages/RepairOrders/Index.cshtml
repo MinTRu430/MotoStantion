@@ -1,0 +1,187 @@
+﻿@page
+@model MotoStation.Pages.RepairOrders.IndexModel
+
+@{
+    ViewData["Title"] = "Заказы на ремонт";
+}
+
+<h1>Заказы на ремонт</h1>
+
+<p>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("Create")'">Create New</button>
+</p>
+
+<form method="get">
+    <div class="form-group">
+        <label asp-for="SearchOrderDateFrom"></label>
+        <input asp-for="SearchOrderDateFrom" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchOrderDateTo"></label>
+        <input asp-for="SearchOrderDateTo" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchEstimatedCompletionDateFrom"></label>
+        <input asp-for="SearchEstimatedCompletionDateFrom" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchEstimatedCompletionDateTo"></label>
+        <input asp-for="SearchEstimatedCompletionDateTo" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchActualCompletionDateFrom"></label>
+        <input asp-for="SearchActualCompletionDateFrom" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchActualCompletionDateTo"></label>
+        <input asp-for="SearchActualCompletionDateTo" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchStatus"></label>
+        <input asp-for="SearchStatus" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchTotalCost"></label>
+        <input asp-for="SearchTotalCost" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchMotorcycleId"></label>
+        <input asp-for="SearchMotorcycleId" class="form-control" type="number" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchEmployeeId"></label>
+        <input asp-for="SearchEmployeeId" class="form-control" type="number" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="/RepairOrders/Index" asp-route-SortField="OrderDate" asp-route-SortDescending="@(Model.SortField == "OrderDate" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.RepairOrder[0].OrderDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/RepairOrders/Index" asp-route-SortField="EstimatedCompletionDate" asp-route-SortDescending="@(Model.SortField == "EstimatedCompletionDate" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.RepairOrder[0].EstimatedCompletionDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/RepairOrders/Index" asp-route-SortField="ActualCompletionDate" asp-route-SortDescending="@(Model.SortField == "ActualCompletionDate" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.RepairOrder[0].ActualCompletionDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/RepairOrders/Index" asp-route-SortField="Status" asp-route-SortDescending="@(Model.SortField == "Status" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.RepairOrder[0].Status)
+                </a>
+            </th>
+            <th>
+                <a asp-page="/RepairOrders/Index" asp-route-SortField="TotalCost" asp-route-SortDescending="@(Model.SortField == "TotalCost" && !Model.SortDescending)">
+                    @Html.DisplayNameFor(model => model.RepairOrder[0].TotalCost)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Motorcycle.Make)
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Motorcycle.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Motorcycle.Customer.FirstName)
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Motorcycle.Customer.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Employee.FirstName)
+                @Html.DisplayNameFor(model => model.RepairOrder[0].Employee.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RepairOrder)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedCompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActualCompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @if (item.Motorcycle != null)
+                    {
+                        @item.Motorcycle.Make @item.Motorcycle.Model
+                    }
+                </td>
+                <td>
+                    @if (item.Motorcycle != null && item.Motorcycle.Customer != null)
+                    {
+                        @item.Motorcycle.Customer.FirstName @item.Motorcycle.Customer.LastName
+                    }
+                </td>
+                <td>
+                    @if (item.Employee != null)
+                    {
+                        @item.Employee.FirstName @item.Employee.LastName
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Edit", new { id = item.RepairOrderId })'">Edit</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Details", new { id = item.RepairOrderId })'">Details</button>
+                    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Delete", new { id = item.RepairOrderId })'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+</style>

@@ -1,0 +1,93 @@
+﻿@page
+@model MotoStation.Pages.Parts.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Part</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Part.PartId" />
+            <div class="form-group">
+                <label asp-for="Part.PartName" class="control-label"></label>
+                <input asp-for="Part.PartName" class="form-control" />
+                <span asp-validation-for="Part.PartName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.PartDescription" class="control-label"></label>
+                <input asp-for="Part.PartDescription" class="form-control" />
+                <span asp-validation-for="Part.PartDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.Price" class="control-label"></label>
+                <input asp-for="Part.Price" class="form-control" />
+                <span asp-validation-for="Part.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.StockQuantity" class="control-label"></label>
+                <input asp-for="Part.StockQuantity" class="form-control" />
+                <span asp-validation-for="Part.StockQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-custom" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <button class="btn btn-custom" onclick="location.href='@Url.Page("./Index")'">Back to List</button>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1, h4 {
+        color: #343a40;
+    }
+
+    .btn-custom {
+        background-color: #ffcc00;
+        color: #343a40;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin: 5px;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #e6b800;
+            color: #ffffff;
+        }
+
+    .form-control {
+        border: 2px solid #ffcc00;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>
